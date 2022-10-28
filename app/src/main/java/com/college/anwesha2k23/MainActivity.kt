@@ -9,6 +9,7 @@ import com.college.anwesha2k23.databinding.ActivityMainBinding
 import com.college.anwesha2k23.Fragments.bottom_nav.Events
 import com.college.anwesha2k23.Fragments.bottom_nav.Home
 import com.college.anwesha2k23.Fragments.bottom_nav.Profile
+
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
