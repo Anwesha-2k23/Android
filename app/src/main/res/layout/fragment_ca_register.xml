@@ -22,7 +22,8 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0"/>
+            app:layout_constraintVertical_bias="1.0"
+            tools:ignore="ContentDescription" />
 
         <ImageView
             android:id="@+id/anweshaLogo"
@@ -40,7 +41,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
+            android:fontFamily="@font/stoica_brush"
             android:text="@string/register_for_campus_ambassador"
+            android:textColor="#000000"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -127,7 +130,7 @@
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:background="@drawable/text_input_bg"
-            android:hint="@string/year_of_study"
+            android:hint="@string/years_of_study"
             android:paddingTop="5dp"
             android:layout_marginTop="20dp"
             app:boxBackgroundMode="none"
@@ -146,7 +149,7 @@
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:background="@drawable/text_input_bg"
-            android:hint="@string/referral_code"
+            android:hint="@string/referral"
             android:paddingTop="5dp"
             app:boxBackgroundMode="none"
             app:layout_constraintEnd_toEndOf="@+id/college"
