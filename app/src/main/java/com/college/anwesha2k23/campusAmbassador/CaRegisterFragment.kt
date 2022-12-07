@@ -15,8 +15,8 @@ class CaRegisterFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentCaRegisterBinding.inflate(inflater, container, false)
-        val view = binding.root
 
-        return view
+
+        return binding.root
     }
 }

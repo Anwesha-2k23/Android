@@ -33,4 +33,9 @@
     <string name="anwesha_is_in_progress">Anwesha\'23 IIT PATNA </string>
     <string name="aaaaaa">COMING SOON…</string>
     <string name="register_for_campus_ambassador">Register For campus Ambassador</string>
+    <string name="full_name">Full Name</string>
+    <string name="college_name">College Name</string>
+    <string name="year_of_study">Year of study</string>
+    <string name="register">Register</string>
+    <string name="referral_code">Referral Code</string>
 </resources>

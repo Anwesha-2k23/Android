@@ -21,11 +21,18 @@ class CaOpenFragment : Fragment() {
         val view = binding.root
 
         setAnime()
-
+        binding.button.setOnClickListener{
+            loadFragment(CaRegisterFragment())
+        }
         return view
     }
+    private fun loadFragment(fragment: Fragment){
+        val fragmentTransaction = activity?.supportFragmentManager!!.beginTransaction()
+        fragmentTransaction.replace(R.id.CaContainer, fragment)
+        fragmentTransaction.commit()
+    }
 
-    fun setAnime(){
+    private fun setAnime(){
         binding.animationView.setAnimation(R.raw.ca_anime)
         binding.animationView.repeatCount = LottieDrawable.INFINITE
         binding.animationView.playAnimation()
