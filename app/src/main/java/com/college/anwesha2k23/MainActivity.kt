@@ -3,12 +3,11 @@ package com.college.anwesha2k23
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import com.college.anwesha2k23.Fragments.bottom_nav.Gallery
 import com.college.anwesha2k23.R.*
 import com.college.anwesha2k23.databinding.ActivityMainBinding
-import com.college.anwesha2k23.Fragments.bottom_nav.Events
-import com.college.anwesha2k23.Fragments.bottom_nav.Home
-import com.college.anwesha2k23.Fragments.bottom_nav.Profile
+import com.college.anwesha2k23.events.EventsFragment
+import com.college.anwesha2k23.home.HomeFragment
+import com.college.anwesha2k23.profile.ProfileFragment
 
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
@@ -24,29 +23,25 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         supportActionBar?.hide() //Hide App title
 
-        loadFragment(Home())
+        loadFragment(HomeFragment())
 
         bottomNav = binding.bottomNavigation
         bottomNav.setOnItemSelectedListener {
             when(it.itemId){
                 id.home -> {
-                    loadFragment(Home())
-                    true
-                }
-                id.gallery -> {
-                    loadFragment(Gallery())
+                    loadFragment(HomeFragment())
                     true
                 }
                 id.profile -> {
-                    loadFragment(Profile())
+                    loadFragment(ProfileFragment())
                     true
                 }
                 id.event -> {
-                    loadFragment(Events())
+                    loadFragment(EventsFragment())
                     true
                 }
                 else->{
-                    loadFragment(Home())
+                    loadFragment(HomeFragment())
                     true
                 }
             }
