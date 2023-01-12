@@ -2,18 +2,16 @@ package com.college.anwesha2k23
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import com.college.anwesha2k23.R.*
+import androidx.navigation.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
 import com.college.anwesha2k23.databinding.ActivityMainBinding
-import com.college.anwesha2k23.events.EventsFragment
-import com.college.anwesha2k23.home.HomeFragment
-import com.college.anwesha2k23.profile.ProfileFragment
 
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
 
-    private  lateinit var bottomNav: BottomNavigationView
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,36 +19,11 @@ class MainActivity : AppCompatActivity() {
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        supportActionBar?.hide() //Hide App title
 
-        loadFragment(HomeFragment())
+        val navView: BottomNavigationView = binding.bottomNavigation
 
-        bottomNav = binding.bottomNavigation
-        bottomNav.setOnItemSelectedListener {
-            when(it.itemId){
-                id.home -> {
-                    loadFragment(HomeFragment())
-                    true
-                }
-                id.profile -> {
-                    loadFragment(ProfileFragment())
-                    true
-                }
-                id.event -> {
-                    loadFragment(EventsFragment())
-                    true
-                }
-                else->{
-                    loadFragment(HomeFragment())
-                    true
-                }
-            }
-        }
-    }
-    private fun loadFragment(fragment: Fragment){
-        val fragmentTransaction = supportFragmentManager.beginTransaction()
-        fragmentTransaction.replace(id.fragmentContainer, fragment)
-        fragmentTransaction.addToBackStack(null)
-        fragmentTransaction.commit()
+        val navController = findNavController(R.id.fragmentContainer)
+        navView.setupWithNavController(navController)
+
     }
 }
