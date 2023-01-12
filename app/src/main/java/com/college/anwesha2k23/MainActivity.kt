@@ -3,8 +3,6 @@ package com.college.anwesha2k23
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.college.anwesha2k23.databinding.ActivityMainBinding
 
@@ -21,7 +19,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val navView: BottomNavigationView = binding.bottomNavigation
-
         val navController = findNavController(R.id.fragmentContainer)
         navView.setupWithNavController(navController)
 
