@@ -49,6 +49,13 @@ class MainActivity : AppCompatActivity() {
         binding.notificationBtn.setOnClickListener {
             navController.navigate(R.id.notification)
         }
+        binding.bottomNavigation.setOnClickListener {
+            when(it.id){
+                R.id.home->{
+                    navController.navigate(R.id.home)
+                }
+            }
+        }
 
         selectingItems()
 
