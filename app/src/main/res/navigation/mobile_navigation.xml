@@ -10,7 +10,30 @@
         android:name="com.college.anwesha2k23.home.HomeFragment"
         android:label="@string/home"
         tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_home_to_profile"
+            app:destination="@id/profile" />
+        <action
+            android:id="@+id/action_home_to_event"
+            app:destination="@id/event" />
+        <action
+            android:id="@+id/action_home_to_notification2"
+            app:destination="@id/notification" />
+        <action
+            android:id="@+id/action_home_to_singleEvent"
+            app:destination="@id/singleEvent" />
     </fragment>
+    <fragment
+        android:id="@+id/notification"
+        android:name="com.college.anwesha2k23.notification.NotificationFragment"
+        tools:layout="@layout/fragment_notification"
+        android:label="Notification"/>
+
+    <fragment
+        android:id="@+id/singleEvent"
+        android:name="com.college.anwesha2k23.events.SingleEventFragment"
+        android:label="Single Event"
+        tools:layout="@layout/fragment_single_event"/>
 
     <fragment
         android:id="@+id/event"

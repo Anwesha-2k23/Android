@@ -1,13 +1,14 @@
 package com.college.anwesha2k23.home
 
 import android.os.Bundle
-import android.text.TextUtils.replace
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.airbnb.lottie.LottieDrawable
@@ -26,7 +27,6 @@ class HomeFragment : Fragment() {
     private lateinit var eventViewModel: EventsViewModel
     private lateinit var adapter: EventAdapter
     private lateinit var newEventView : RecyclerView
-    private lateinit var newEventList : ArrayList<EventList>
 
 
     override fun onCreateView(
@@ -60,6 +60,17 @@ class HomeFragment : Fragment() {
 
         })
         setAnime()
+
+        binding.dayOne.setOnClickListener{
+            Toast.makeText(context, "Day 1 is clicked", Toast.LENGTH_SHORT).show()
+            //On click it will refresh the recycler view and show the list of event happening on that day
+        }
+        binding.dayTwo.setOnClickListener{
+            Toast.makeText(context, "Day 2 is clicked", Toast.LENGTH_SHORT).show()
+        }
+        binding.dayThree.setOnClickListener{
+            Toast.makeText(context, "Day 3 is clicked", Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun loadEvent(event: EventList){
@@ -67,15 +78,11 @@ class HomeFragment : Fragment() {
         bundle.putString("eventName", event.eventName)
         val fragment = SingleEventFragment()
         fragment.arguments = bundle
-
         val fragmentTransaction = activity?.supportFragmentManager!!.beginTransaction()
         fragmentTransaction.replace(R.id.fragmentContainer, fragment)
         fragmentTransaction.addToBackStack(null)
         fragmentTransaction.commit()
-
     }
-
-
     private fun setAnime() {
         binding.animationView.setAnimation(R.raw.map_replace)
         binding.animationView.repeatCount = LottieDrawable.INFINITE

@@ -26,7 +26,5 @@ class SingleEventFragment : Fragment() {
             binding.eventName.text = args.getString("eventName")
         }
         return binding.root
-
     }
-
 }
