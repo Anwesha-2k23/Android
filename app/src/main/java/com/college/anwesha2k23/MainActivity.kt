@@ -14,9 +14,13 @@ import androidx.navigation.ui.setupWithNavController
 import com.college.anwesha2k23.auth.SignIn
 import com.college.anwesha2k23.campusAmbassador.CaActivity
 import com.college.anwesha2k23.databinding.ActivityMainBinding
+import com.college.anwesha2k23.events.EventsFragment
+import com.college.anwesha2k23.home.HomeFragment
 import com.college.anwesha2k23.notification.NotificationFragment
+import com.college.anwesha2k23.profile.ProfileFragment
 
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.navigation.NavigationBarView
 import com.google.android.material.navigation.NavigationView
 
 class MainActivity : AppCompatActivity() {
@@ -37,26 +41,25 @@ class MainActivity : AppCompatActivity() {
         drawerLayout.addDrawerListener(actionBarToggle)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         actionBarToggle.syncState()
-
+        loadFragment(HomeFragment())
         binding.navBar.setOnClickListener {
             drawerLayout.openDrawer(Gravity.LEFT)
         }
         binding.bottomNavigation
 
-
         val navView: BottomNavigationView = binding.bottomNavigation
         val navController = findNavController(R.id.fragmentContainer)
         navView.setupWithNavController(navController)
         binding.notificationBtn.setOnClickListener {
-            loadNotification()
+            loadFragment(NotificationFragment())
         }
         selectingItems()
 
     }
 
-    private fun loadNotification() {
+    private fun loadFragment(fragment: Fragment) {
         val fragmentManager = supportFragmentManager.beginTransaction()
-        fragmentManager.replace(R.id.fragmentContainer, NotificationFragment())
+        fragmentManager.replace(R.id.fragmentContainer, fragment)
         fragmentManager.addToBackStack(null)
         fragmentManager.commit()
     }
