@@ -81,7 +81,7 @@ class HomeFragment : Fragment() {
         fragment.arguments = bundle
         val fragmentTransaction = activity?.supportFragmentManager!!.beginTransaction()
         fragmentTransaction.replace(R.id.fragmentContainer, fragment)
-//        fragmentTransaction.addToBackStack(null)
+        fragmentTransaction.addToBackStack(null)
         fragmentTransaction.commit()
     }
     private fun setAnime() {

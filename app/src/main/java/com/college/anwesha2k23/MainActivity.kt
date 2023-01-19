@@ -11,6 +11,7 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
+import com.college.anwesha2k23.auth.SignIn
 import com.college.anwesha2k23.campusAmbassador.CaActivity
 import com.college.anwesha2k23.databinding.ActivityMainBinding
 import com.college.anwesha2k23.notification.NotificationFragment
@@ -40,7 +41,7 @@ class MainActivity : AppCompatActivity() {
         binding.navBar.setOnClickListener {
             drawerLayout.openDrawer(Gravity.LEFT)
         }
-
+        binding.bottomNavigation
 
 
         val navView: BottomNavigationView = binding.bottomNavigation
@@ -52,11 +53,12 @@ class MainActivity : AppCompatActivity() {
         selectingItems()
 
     }
+
     private fun loadNotification() {
-        val fragmentTransaction = supportFragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.fragmentContainer, NotificationFragment())
-        fragmentTransaction.addToBackStack(null)
-        fragmentTransaction.commit()
+        val fragmentManager = supportFragmentManager.beginTransaction()
+        fragmentManager.replace(R.id.fragmentContainer, NotificationFragment())
+        fragmentManager.addToBackStack(null)
+        fragmentManager.commit()
     }
 
     override fun onSupportNavigateUp(): Boolean {

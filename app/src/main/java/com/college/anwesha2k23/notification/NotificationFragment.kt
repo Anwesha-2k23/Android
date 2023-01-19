@@ -23,7 +23,6 @@ class NotificationFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        container?.removeAllViews()
         // Inflate the layout for this fragment
         _binding = FragmentNotificationBinding.inflate(inflater, container, false)
         return binding.root
