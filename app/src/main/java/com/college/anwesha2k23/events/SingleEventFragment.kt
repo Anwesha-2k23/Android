@@ -20,6 +20,7 @@ class SingleEventFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        container?.removeAllViews()
         _binding = FragmentSingleEventBinding.inflate(inflater,container,false)
         val args = this.arguments
         if (args != null) {

@@ -22,6 +22,7 @@ class EventsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        container?.removeAllViews()
         _binding = FragmentEventsBinding.inflate(inflater, container, false)
         return binding.root
     }

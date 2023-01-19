@@ -47,18 +47,16 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.fragmentContainer)
         navView.setupWithNavController(navController)
         binding.notificationBtn.setOnClickListener {
-            navController.navigate(R.id.notification)
+            loadNotification()
         }
-        binding.bottomNavigation.setOnClickListener {
-            when(it.id){
-                R.id.home->{
-                    navController.navigate(R.id.home)
-                }
-            }
-        }
-
         selectingItems()
 
+    }
+    private fun loadNotification() {
+        val fragmentTransaction = supportFragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.fragmentContainer, NotificationFragment())
+        fragmentTransaction.addToBackStack(null)
+        fragmentTransaction.commit()
     }
 
     override fun onSupportNavigateUp(): Boolean {
