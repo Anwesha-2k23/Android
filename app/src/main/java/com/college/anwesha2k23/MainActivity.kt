@@ -3,18 +3,24 @@ package com.college.anwesha2k23
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.preference.PreferenceManager
 import android.view.Gravity
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
+import com.college.anwesha2k23.auth.SignIn
 import com.college.anwesha2k23.campusAmbassador.CaActivity
 import com.college.anwesha2k23.databinding.ActivityMainBinding
+import com.college.anwesha2k23.events.EventsFragment
+import com.college.anwesha2k23.home.HomeFragment
+import com.college.anwesha2k23.notification.NotificationFragment
+import com.college.anwesha2k23.profile.ProfileFragment
 
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.navigation.NavigationBarView
 import com.google.android.material.navigation.NavigationView
 
 class MainActivity : AppCompatActivity() {
@@ -35,17 +41,27 @@ class MainActivity : AppCompatActivity() {
         drawerLayout.addDrawerListener(actionBarToggle)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         actionBarToggle.syncState()
-
+        loadFragment(HomeFragment())
         binding.navBar.setOnClickListener {
             drawerLayout.openDrawer(Gravity.LEFT)
         }
+        binding.bottomNavigation
 
         val navView: BottomNavigationView = binding.bottomNavigation
         val navController = findNavController(R.id.fragmentContainer)
         navView.setupWithNavController(navController)
-
+        binding.notificationBtn.setOnClickListener {
+            loadFragment(NotificationFragment())
+        }
         selectingItems()
 
+    }
+
+    private fun loadFragment(fragment: Fragment) {
+        val fragmentManager = supportFragmentManager.beginTransaction()
+        fragmentManager.replace(R.id.fragmentContainer, fragment)
+        fragmentManager.addToBackStack(null)
+        fragmentManager.commit()
     }
 
     override fun onSupportNavigateUp(): Boolean {
