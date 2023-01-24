@@ -5,13 +5,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.college.anwesha2k23.databinding.FragmentEventsBinding
+import com.college.anwesha2k23.databinding.FragmentSingleEventBinding
 
-
-class EventsFragment : Fragment() {
-    private var _binding: FragmentEventsBinding?= null
+class SingleEventFragment : Fragment() {
+    private var _binding: FragmentSingleEventBinding? = null
     private val binding get() = _binding!!
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -22,8 +20,11 @@ class EventsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        container?.removeAllViews()
-        _binding = FragmentEventsBinding.inflate(inflater, container, false)
+        _binding = FragmentSingleEventBinding.inflate(inflater,container,false)
+        val args = this.arguments
+        if (args != null) {
+            binding.eventName.text = args.getString("eventName")
+        }
         return binding.root
     }
 }
