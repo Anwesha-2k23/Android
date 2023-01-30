@@ -1,5 +1,6 @@
 package com.college.anwesha2k23.home
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -7,8 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.airbnb.lottie.LottieDrawable
@@ -27,6 +26,12 @@ class HomeFragment : Fragment() {
     private lateinit var eventViewModel: EventsViewModel
     private lateinit var adapter: EventAdapter
     private lateinit var newEventView : RecyclerView
+    private lateinit var mContext: Context
+
+    override fun onAttach(context: Context) {
+        mContext = context
+        super.onAttach(context)
+    }
 
 
     override fun onCreateView(
@@ -89,5 +94,7 @@ class HomeFragment : Fragment() {
         binding.animationView.repeatCount = LottieDrawable.INFINITE
         binding.animationView.playAnimation()
     }
+
+
 
 }
