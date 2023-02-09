@@ -91,10 +91,7 @@
             tools:listitem="@layout/event_design" />
 
 
-
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

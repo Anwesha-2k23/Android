@@ -9,6 +9,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.college.anwesha2k23.auth.SignIn
@@ -36,31 +37,61 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+
+        loadFragment(HomeFragment())
         drawerLayout = binding.drawerLayout
         actionBarToggle = ActionBarDrawerToggle(this, drawerLayout, 0, 0)
         drawerLayout.addDrawerListener(actionBarToggle)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         actionBarToggle.syncState()
-        loadFragment(HomeFragment())
         binding.navBar.setOnClickListener {
             drawerLayout.openDrawer(Gravity.LEFT)
         }
-        binding.bottomNavigation
+        binding.bottomNavigation.setOnItemSelectedListener {
+            when(it.itemId){
+                R.id.home->{
+                    loadFragment(HomeFragment())
+                    true
+                }
+                R.id.event->{
+                    loadFragment(EventsFragment())
+                    true
+                }R.id.profile->{
+                loadFragment(ProfileFragment())
+                true
+            }
+                else->{
+                    loadFragment(HomeFragment())
+                    true
+                }
+            }
+        }
 
-        val navView: BottomNavigationView = binding.bottomNavigation
-        val navController = findNavController(R.id.fragmentContainer)
-        navView.setupWithNavController(navController)
+        binding.bottomNavigation.setOnItemReselectedListener {
+            when(it.itemId){
+                R.id.home->{
+                    //Do Nothing because home fragment is added in back stack
+                }
+            }
+        }
         binding.notificationBtn.setOnClickListener {
-            loadFragment(NotificationFragment())
+            loadNotification()
         }
         selectingItems()
 
     }
 
+    private fun loadNotification() {
+        val fragmentManager = supportFragmentManager.beginTransaction()
+        fragmentManager.replace(R.id.fragmentContainer, NotificationFragment())
+        fragmentManager.addToBackStack(null)
+        fragmentManager.commit()
+    }
+
     private fun loadFragment(fragment: Fragment) {
         val fragmentManager = supportFragmentManager.beginTransaction()
         fragmentManager.replace(R.id.fragmentContainer, fragment)
-        fragmentManager.addToBackStack(null)
+//        fragmentManager.addToBackStack(null)
         fragmentManager.commit()
     }
 
@@ -71,12 +102,18 @@ class MainActivity : AppCompatActivity() {
 
     // override the onBackPressed() function to close the Drawer when the back button is clicked
     override fun onBackPressed() {
+        val nav = binding.bottomNavigation
         if (this.drawerLayout.isDrawerOpen(GravityCompat.START)) {
             this.drawerLayout.closeDrawer(GravityCompat.START)
-        } else {
+        }
+        else if (nav.selectedItemId != R.id.home) {
+            nav.selectedItemId = R.id.home
+        }
+        else {
             super.onBackPressed()
         }
     }
+
 
     private fun selectingItems() {
         binding.navView.setNavigationItemSelectedListener { menuItem ->
