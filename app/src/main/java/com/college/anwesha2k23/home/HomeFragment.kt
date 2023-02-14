@@ -1,6 +1,7 @@
 package com.college.anwesha2k23.home
 
 import android.content.Intent
+import android.content.Context
 import android.os.Bundle
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -12,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.airbnb.lottie.LottieDrawable
@@ -23,12 +25,16 @@ import com.college.anwesha2k23.events.EventAdapter
 import com.college.anwesha2k23.events.EventList
 import com.college.anwesha2k23.home.functions.get_events
 import com.college.anwesha2k23.home.functions.nav_items_functions
+import com.college.anwesha2k23.events.EventsViewModel
+import com.college.anwesha2k23.events.SingleEventFragmente
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.navigation.NavigationView
 
 
 class HomeFragment : Fragment() {
-    private lateinit var binding: FragmentHomeBinding
+    private var _binding : FragmentHomeBinding? =  null
+    private val binding get()  = _binding!!
+    private lateinit var eventViewModel: EventsViewModel
     private lateinit var adapter: EventAdapter
     private lateinit var newEventView : RecyclerView
     private lateinit var newEventList : ArrayList<EventList>
@@ -36,13 +42,14 @@ class HomeFragment : Fragment() {
     private lateinit var actionBarToggle: ActionBarDrawerToggle
     private lateinit var navView: NavigationView
 
+    private lateinit var mContext: Context
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentHomeBinding.inflate(inflater,container,false)
-
-
         newEventList = arrayListOf()
         drawerLayout = binding.frameLayout
         actionBarToggle = ActionBarDrawerToggle(activity, drawerLayout, 0, 0)
@@ -52,29 +59,44 @@ class HomeFragment : Fragment() {
         binding.navBar.setOnClickListener {
             drawerLayout.openDrawer(Gravity.LEFT)
         }
-
         val bottomSheet = binding.eventBottomSheet
         val behavior = BottomSheetBehavior.from(bottomSheet)
-        behavior.peekHeight = 400
+        behavior.peekHeight = 1000
         behavior.state = BottomSheetBehavior.STATE_COLLAPSED
 
-        nav_items_functions(binding, requireActivity()).selectingItems()
 
+        nav_items_functions(binding, requireActivity()).selectingItems()
+        eventViewModel= ViewModelProvider(this)[EventsViewModel::class.java]
         return binding.root
 
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        get_events(binding, requireActivity()).getUserData(newEventList)
+        //preparing the recycler view
         val layoutManager = LinearLayoutManager(context)
         newEventView = binding.eventsList
         newEventView.layoutManager = layoutManager
         newEventView.setHasFixedSize(true)
-        adapter = EventAdapter(newEventList)
+        adapter = EventAdapter(eventViewModel.events)               //getting list of events from Events view Moder
         newEventView.adapter = adapter
+        adapter.setOnItemClickListener(object : EventAdapter.OnItemClickListener{
+            override fun onItemClicked(event: EventList) {          //when any event from the recycler view is clicked
+                loadEvent(event)
+            }
 
+        })
         setAnime()
+
+        binding.dayOne.setOnClickListener{
+            Toast.makeText(context, "Day 1 is clicked", Toast.LENGTH_SHORT).show()
+            //On click it will refresh the recycler view and show the list of event happening on that day
+        }
+        binding.dayTwo.setOnClickListener{
+            Toast.makeText(context, "Day 2 is clicked", Toast.LENGTH_SHORT).show()
+        }
+        binding.dayThree.setOnClickListener{
+            Toast.makeText(context, "Day 3 is clicked", Toast.LENGTH_SHORT).show()
+        }
     }
 
     fun onSupportNavigateUp(): Boolean {
@@ -89,6 +111,17 @@ class HomeFragment : Fragment() {
         } else {
             requireActivity().onBackPressed()
         }
+    }
+    
+    private fun loadEvent(event: EventList){
+        val bundle = Bundle()
+        bundle.putString("eventName", event.eventName)
+        val fragment = SingleEventFragment()
+        fragment.arguments = bundle
+        val fragmentTransaction = activity?.supportFragmentManager!!.beginTransaction()
+        fragmentTransaction.replace(R.id.fragmentContainer, fragment)
+        fragmentTransaction.addToBackStack(null)
+        fragmentTransaction.commit()
     }
 
     fun setAnime() {
