@@ -1,7 +1,6 @@
 package com.college.anwesha2k23.home
 
 import android.os.Bundle
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,24 +15,19 @@ import androidx.recyclerview.widget.RecyclerView
 import com.airbnb.lottie.LottieDrawable
 import com.college.anwesha2k23.R
 import com.college.anwesha2k23.databinding.FragmentHomeBinding
-import com.college.anwesha2k23.events.*
+import com.college.anwesha2k23.events.SingleEventFragment
 import com.college.anwesha2k23.home.functions.nav_items_functions
 import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.google.android.material.navigation.NavigationView
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 
 class HomeFragment : Fragment() {
     private lateinit var binding : FragmentHomeBinding
     private lateinit var eventViewModel: EventsViewModel
-    private lateinit var newEventView : RecyclerView
+    private lateinit var eventRecyclerView: RecyclerView
     private lateinit var newEventList : ArrayList<EventList>
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var actionBarToggle: ActionBarDrawerToggle
-    private lateinit var adap: EventAdapter
-    private lateinit var navView: NavigationView
+    private lateinit var adapter: EventAdapter
 
 
     override fun onCreateView(
@@ -48,7 +42,7 @@ class HomeFragment : Fragment() {
         actionBarToggle.syncState()
 
         binding.navBar.setOnClickListener {
-            drawerLayout.openDrawer(Gravity.LEFT)
+            drawerLayout.openDrawer(GravityCompat.START)
         }
         val bottomSheet = binding.eventBottomSheet
         val behavior = BottomSheetBehavior.from(bottomSheet)
@@ -63,37 +57,9 @@ class HomeFragment : Fragment() {
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //preparing the recycler view
-        newEventView = binding.eventsList
-        val serviceGenerator = EventsApiService.buildService(EventsApi::class.java)
-        val call = serviceGenerator.getEvents()
 
-        call.enqueue(object : Callback<MutableList<EventList>>{
-            override fun onResponse(
-                call: Call<MutableList<EventList>>,
-                response: Response<MutableList<EventList>>
-            ) {
-                newEventView.apply {
-                    layoutManager = LinearLayoutManager(context)
-                    adap = EventAdapter(response.body()!! as ArrayList<EventList>, context)
-                    adapter = adap
-                    adap.setOnItemClickListener(object : EventAdapter.OnItemClickListener{
-                        override fun onItemClicked(event: EventList) {          //when any event from the recycler view is clicked
-                            loadSingleEventFragment(event)
-                        }
+        loadEvents()
 
-                    })
-                }
-//                Toast.makeText(context, "Api Called", Toast.LENGTH_SHORT).show()
-            }
-
-            override fun onFailure(call: Call<MutableList<EventList>>, t: Throwable) {
-                Toast.makeText(context, "$t", Toast.LENGTH_SHORT).show()
-            }
-
-        }
-
-        )
         setAnime()
 
         binding.dayOne.setOnClickListener{
@@ -108,23 +74,35 @@ class HomeFragment : Fragment() {
         }
     }
 
-    fun onSupportNavigateUp(): Boolean {
-        drawerLayout.openDrawer(navView)
-        return true
+    private fun loadEvents() {
+        eventRecyclerView = binding.eventsList
+        eventRecyclerView.layoutManager = LinearLayoutManager(context)
+        adapter = EventAdapter(requireContext())
+        eventRecyclerView.adapter = adapter
+        getEvents()
     }
 
-    // override the onBackPressed() function to close the Drawer when the back button is clicked
-    fun onBackPressed() {
-        if (this.drawerLayout.isDrawerOpen(GravityCompat.START)) {
-            this.drawerLayout.closeDrawer(GravityCompat.START)
-        } else {
-            requireActivity().onBackPressed()
+    private fun getEvents() {
+        eventViewModel.getEventListObserver().observe(viewLifecycleOwner) {
+            if (it != null) {
+                adapter.setEvents(it)
+                adapter.notifyDataSetChanged()
+                adapter.setOnItemClickListener(object : EventAdapter.OnItemClickListener {
+                    override fun onItemClicked(event: EventList) {          //when any event from the recycler view is clicked
+                        loadSingleEventFragment(event)
+                    }
+                })
+            } else {
+                Toast.makeText(context, "Error in getting Events", Toast.LENGTH_SHORT).show()
+            }
         }
+
+        eventViewModel.makeApiCall()
     }
-    
+
     private fun loadSingleEventFragment(event: EventList){
         val bundle = Bundle()
-        bundle.putString("eventName", event.name)
+        bundle.putSerializable("event", event)
         val fragment = SingleEventFragment()
         fragment.arguments = bundle
         val fragmentTransaction = activity?.supportFragmentManager!!.beginTransaction()
@@ -133,7 +111,7 @@ class HomeFragment : Fragment() {
         fragmentTransaction.commit()
     }
 
-    fun setAnime() {
+    private fun setAnime() {
         binding.animationView.setAnimation(R.raw.map_replace)
         binding.animationView.repeatCount = LottieDrawable.INFINITE
         binding.animationView.playAnimation()

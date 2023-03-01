@@ -13,8 +13,8 @@ interface EventsApi {
 }
 
 object EventsApiService {
-    private val client = OkHttpClient.Builder().build()
 
+    private val client = OkHttpClient.Builder().build()
     private val retrofit = Retrofit.Builder()
         .baseUrl(BASE_URL)
         .addConverterFactory(GsonConverterFactory.create())

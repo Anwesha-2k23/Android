@@ -9,10 +9,18 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.college.anwesha2k23.databinding.EventDesignBinding
+import java.text.SimpleDateFormat
+import java.util.*
 
-class EventAdapter(private val eventList: ArrayList<EventList>, private val context: Context): RecyclerView.Adapter<EventAdapter.MyViewHolder>(){
+class EventAdapter( private val context: Context): RecyclerView.Adapter<EventAdapter.MyViewHolder>(){
 
     private lateinit var listener: OnItemClickListener
+    private var eventList: kotlin.collections.ArrayList<EventList> = ArrayList()
+
+    fun setEvents(events: kotlin.collections.ArrayList<EventList>){
+        eventList = events
+
+    }
 
     //Interface that will tell what happens when a event is clicked
     interface OnItemClickListener{
@@ -35,8 +43,18 @@ class EventAdapter(private val eventList: ArrayList<EventList>, private val cont
             .into(holder.eventPoster)
         holder.eventName.text = currentItem.name
         holder.eventLocation.text = currentItem.venue
-        holder.eventDate.text = currentItem.start_time
-        holder.eventTime.text = currentItem.end_time
+
+        val inputString = currentItem.start_time
+        val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.getDefault())
+        val outputFormat = SimpleDateFormat("dd MMMM yyyy, HH:mm", Locale.getDefault())
+
+        inputFormat.timeZone = TimeZone.getTimeZone("UTC+5:30") // set input timezone to UTC
+        val date = inputFormat.parse(inputString!!) // parse input string into date object
+        outputFormat.timeZone = TimeZone.getDefault() // set output timezone to default timezone
+        val outputString = outputFormat.format(date!!) // format date object into output string
+        val separatedStrings = outputString.split(",").map { it.trim() }
+        holder.eventDate.text = separatedStrings[0]
+        holder.eventTime.text = separatedStrings[1]
         holder.itemView.startAnimation(animation)
         holder.itemView.setOnClickListener{
             listener.onItemClicked(currentItem)
