@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.college.anwesha2k23.R
 import com.college.anwesha2k23.databinding.FragmentProfileBinding
-import com.college.anwesha2k23.events.EventAdapter
+
 import com.college.anwesha2k23.events.ProfileEventsAdapter
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
