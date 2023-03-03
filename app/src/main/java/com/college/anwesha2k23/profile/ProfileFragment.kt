@@ -1,13 +1,15 @@
 package com.college.anwesha2k23.profile
 
-import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.college.anwesha2k23.R
+import androidx.fragment.app.Fragment
 import com.college.anwesha2k23.databinding.FragmentProfileBinding
+import com.college.anwesha2k23.events.ProfileEventsAdapter
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 import com.college.anwesha2k23.events.ProfileEventsAdapter
 import kotlinx.coroutines.CoroutineScope
