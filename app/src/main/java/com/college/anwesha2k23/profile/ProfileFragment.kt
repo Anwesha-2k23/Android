@@ -11,10 +11,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-import com.college.anwesha2k23.events.ProfileEventsAdapter
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+
 
 class ProfileFragment : Fragment() {
     private var _binding: FragmentProfileBinding?= null
