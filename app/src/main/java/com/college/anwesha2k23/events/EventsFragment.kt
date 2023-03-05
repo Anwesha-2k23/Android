@@ -1,13 +1,10 @@
 package com.college.anwesha2k23.events
 
-import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toolbar
-import com.college.anwesha2k23.R
+import androidx.fragment.app.Fragment
 import com.college.anwesha2k23.databinding.FragmentEventsBinding
 
 

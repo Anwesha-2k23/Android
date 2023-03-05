@@ -1,10 +1,8 @@
 package com.college.anwesha2k23
 
-import android.graphics.Color
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.navigation.findNavController
 import com.college.anwesha2k23.calendar.CalendarFragment
 import com.college.anwesha2k23.databinding.ActivityMainBinding
 import com.college.anwesha2k23.events.EventsFragment

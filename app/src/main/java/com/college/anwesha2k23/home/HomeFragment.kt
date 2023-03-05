@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -12,11 +13,8 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.NavigationUI
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.airbnb.lottie.LottieDrawable
 import com.college.anwesha2k23.R
 import com.college.anwesha2k23.databinding.FragmentHomeBinding
 import com.college.anwesha2k23.events.SingleEventFragment
@@ -24,7 +22,7 @@ import com.college.anwesha2k23.home.functions.nav_items_functions
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 
 
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment()  {
     private lateinit var binding : FragmentHomeBinding
     private lateinit var eventViewModel: EventsViewModel
     private lateinit var eventRecyclerView: RecyclerView
@@ -32,6 +30,7 @@ class HomeFragment : Fragment() {
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var actionBarToggle: ActionBarDrawerToggle
     private lateinit var adapter: EventAdapter
+
 
 
     override fun onCreateView(
@@ -57,7 +56,21 @@ class HomeFragment : Fragment() {
         val bottomSheet = binding.eventBottomSheet
         val behavior = BottomSheetBehavior.from(bottomSheet)
         behavior.peekHeight = 1000
-        behavior.state = BottomSheetBehavior.STATE_HIDDEN
+
+        binding.map.setOnClickListener {
+            behavior.peekHeight = 200
+        }
+
+        //Handle click when venues are clicked
+        binding.firstImage.setOnClickListener {
+            behavior.peekHeight = 1000
+            venueClicked("First Image")
+
+        }
+        binding.secondImage.setOnClickListener {
+            behavior.peekHeight = 1000
+            venueClicked("Second Image")
+        }
 
 
         nav_items_functions(binding, requireActivity()).selectingItems()
@@ -65,14 +78,18 @@ class HomeFragment : Fragment() {
         return binding.root
 
     }
+
+    private fun venueClicked(venue: String) {
+
+        Toast.makeText(context, "$venue clicked", Toast.LENGTH_SHORT).show()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         loadEvents()
 
-        setAnime()
-
-
+//        setAnime()
 
 
         binding.dayOne.setOnClickListener{
@@ -125,9 +142,12 @@ class HomeFragment : Fragment() {
 
     }
 
-    private fun setAnime() {
-        binding.animationView.setAnimation(R.raw.map_replace)
-        binding.animationView.repeatCount = LottieDrawable.INFINITE
-        binding.animationView.playAnimation()
-    }
+
+
+
+//    private fun setAnime() {
+//        binding.animationView.setAnimation(R.raw.map_replace)
+//        binding.animationView.repeatCount = LottieDrawable.INFINITE
+//        binding.animationView.playAnimation()
+//    }
 }
