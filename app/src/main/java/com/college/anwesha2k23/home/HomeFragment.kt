@@ -127,7 +127,7 @@ class HomeFragment : Fragment()  {
             }
         }
 
-        eventViewModel.makeApiCall()
+        eventViewModel.makeApiCall(requireContext())
     }
 
     private fun loadSingleEventFragment(event: EventList){
