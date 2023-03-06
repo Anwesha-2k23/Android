@@ -2,11 +2,9 @@ package com.college.anwesha2k23.home
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.AnimationUtils
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -23,7 +21,6 @@ import com.college.anwesha2k23.home.functions.nav_items_functions
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.collections.ArrayList
 
 
 class HomeFragment : Fragment()  {
@@ -121,7 +118,7 @@ class HomeFragment : Fragment()  {
         val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.getDefault())
         val date = inputFormat.parse(dateString)
         val outputFormat = SimpleDateFormat("dd", Locale.getDefault())
-        return outputFormat.format(date)
+        return outputFormat.format(date!!)
     }
 
     private fun loadEvents() {

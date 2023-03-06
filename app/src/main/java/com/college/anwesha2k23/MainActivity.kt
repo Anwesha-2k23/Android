@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.college.anwesha2k23.calendar.CalendarFragment
 import com.college.anwesha2k23.databinding.ActivityMainBinding
-import com.college.anwesha2k23.events.EventsFragment
 import com.college.anwesha2k23.home.HomeFragment
 import com.college.anwesha2k23.notification.NotificationFragment
 import com.college.anwesha2k23.profile.ProfileFragment
@@ -32,9 +31,8 @@ class MainActivity : AppCompatActivity() {
             ) {
                 when(newIndex){
                     0-> loadFragment(HomeFragment())
-                    1-> loadFragment(EventsFragment())
-                    2-> loadFragment(CalendarFragment())
-                    3-> loadFragment(ProfileFragment())
+                    1-> loadFragment(CalendarFragment())
+                    2-> loadFragment(ProfileFragment())
                 }
             }
 

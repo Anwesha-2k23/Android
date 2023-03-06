@@ -66,15 +66,9 @@ class SignIn : Fragment() {
                         Snackbar.make(view, "Could not verify the user!", Snackbar.LENGTH_LONG)
                             .setAnimationMode(BaseTransientBottomBar.ANIMATION_MODE_SLIDE).show()
                     }
-//                }
-//                catch(e: Exception) {
-//                    myDialog.showErrorAlertDialog("Oops! It seems like an error... ${e.message}")
-//                    Log.e("inside signin: ", "${e.stackTrace}")
-//                }
                 myDialog.dismissProgressDialog()
             }
 
-//            startActivity(intent)
 
 
         }
