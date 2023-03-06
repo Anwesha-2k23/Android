@@ -85,12 +85,15 @@ class Signup : Fragment() {
     }
 
     private fun checkSpinnerValue(spinner: Spinner) : String? {
+
         var value = spinner.selectedItem.toString()
+
 
         if(value.isBlank()) {
             Toast.makeText(context, "Please Enter the user type", Toast.LENGTH_SHORT).show()
             return null
         }
+
 
         value = when(value) {
             "Student" -> "student"
@@ -100,6 +103,7 @@ class Signup : Fragment() {
             "Faculty" -> "faculty"
             else -> "non-student"
         }
+
 
         return value
 
