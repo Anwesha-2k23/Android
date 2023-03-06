@@ -2,6 +2,7 @@ package com.college.anwesha2k23.home
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,6 +21,9 @@ import com.college.anwesha2k23.databinding.FragmentHomeBinding
 import com.college.anwesha2k23.events.SingleEventFragment
 import com.college.anwesha2k23.home.functions.nav_items_functions
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class HomeFragment : Fragment()  {
@@ -89,19 +93,35 @@ class HomeFragment : Fragment()  {
 
         loadEvents()
 
-//        setAnime()
-
-
+//      Day wise event loading
         binding.dayOne.setOnClickListener{
-            Toast.makeText(context, "Day 1 is clicked", Toast.LENGTH_SHORT).show()
-            //On click it will refresh the recycler view and show the list of event happening on that day
+            loadDayEvents("17")
         }
         binding.dayTwo.setOnClickListener{
-            Toast.makeText(context, "Day 2 is clicked", Toast.LENGTH_SHORT).show()
+            loadDayEvents("18")
         }
         binding.dayThree.setOnClickListener{
-            Toast.makeText(context, "Day 3 is clicked", Toast.LENGTH_SHORT).show()
+            loadDayEvents("19")
         }
+    }
+
+    private fun loadDayEvents(day: String) {
+        val dayEvent  = ArrayList<EventList>()
+        for (i in newEventList){
+            val da = getDayFromDate(i.start_time!!)
+            if(day == da ){
+                dayEvent.add(i)
+            }
+        }
+        adapter.setEvents(dayEvent)
+        adapter.notifyDataSetChanged()
+    }
+
+    private fun getDayFromDate(dateString: String): String {
+        val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.getDefault())
+        val date = inputFormat.parse(dateString)
+        val outputFormat = SimpleDateFormat("dd", Locale.getDefault())
+        return outputFormat.format(date)
     }
 
     private fun loadEvents() {
@@ -115,6 +135,7 @@ class HomeFragment : Fragment()  {
     private fun getEvents() {
         eventViewModel.getEventListObserver().observe(viewLifecycleOwner) {
             if (it != null) {
+                newEventList = it
                 adapter.setEvents(it)
                 adapter.notifyDataSetChanged()
                 adapter.setOnItemClickListener(object : EventAdapter.OnItemClickListener {
