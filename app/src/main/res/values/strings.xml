@@ -1,10 +1,11 @@
 <resources>
-    <string name="app_name">Anwesha2k23</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="app_name">Anwesha</string>
     <string name="home">Home</string>
-    <string name="gallery">Gallery</string>
     <string name="profile">Profile</string>
+    <dimen name="event_height_per_hour">70dp</dimen>
+    <dimen name="event_height_per_hour2">40dp</dimen>
+
+
     <string name="anwesha_portal">Anwesha Portal</string>
     <string name="sign_in_to">Sign in to</string>
     <string name="hint">xxxxxxxxx</string>
@@ -44,4 +45,33 @@
     <string name="follow_anwesha_on">Follow Anwesha on</string>
     <string name="user_ca_authentication">Is CA Authenticated</string>
     <string name="instagram">https://www.instagram.com/anwesha.iitp/</string>
+    <string name="time">8:00 PM</string>
+    <string name="eventName">Garba Night</string>
+    <string name="eventTime">29 September 2022</string>
+    <string name="todo">TODO</string>
+    <string name="user_name">Praveen kumar</string>
+    <string name="profile_menu">PROFILE</string>
+    <string name="sponsors_menu">SPONSORS</string>
+    <string name="team_menu">TEAM</string>
+    <string name="feedback_menu">FEEDBACK</string>
+    <string name="about_us_menu">ABOUT US</string>
+    <string name="faq_menu">FAQ</string>
+    <string name="log_out_menu">LOG OUT</string>
+    <string name="campuss_ambassador_menu">CAMPUSS AMBASSADOR</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!--    <string name="BASE_URL">https://backend.anwesha.live/</string>-->
+    <string name="user_login_authentication">Is User Logged In</string>
+    <string name="cookies">Cookies</string>
+    <string name="user_type">User Type</string>
+
+    <string name="user_types_prompt">Choose a User Type</string>
+    
+    <string-array name="user_types">
+        <item>Student</item>
+        <item>IITP Student</item>
+        <item>Not a Student</item>
+        <item>Alumni</item>
+        <item>Faculty</item>
+    </string-array>
 </resources>

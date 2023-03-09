@@ -1,20 +1,17 @@
 package com.college.anwesha2k23
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import com.college.anwesha2k23.Fragments.bottom_nav.Gallery
-import com.college.anwesha2k23.R.*
+import com.college.anwesha2k23.calendar.CalendarFragment
 import com.college.anwesha2k23.databinding.ActivityMainBinding
-import com.college.anwesha2k23.Fragments.bottom_nav.Events
-import com.college.anwesha2k23.Fragments.bottom_nav.Home
-import com.college.anwesha2k23.Fragments.bottom_nav.Profile
-
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.college.anwesha2k23.home.HomeFragment
+import com.college.anwesha2k23.notification.NotificationFragment
+import com.college.anwesha2k23.profile.ProfileFragment
+import nl.joery.animatedbottombar.AnimatedBottomBar
 
 class MainActivity : AppCompatActivity() {
 
-    private  lateinit var bottomNav: BottomNavigationView
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,40 +19,49 @@ class MainActivity : AppCompatActivity() {
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        supportActionBar?.hide() //Hide App title
 
-        loadFragment(Home())
 
-        bottomNav = binding.bottomNavigation
-        bottomNav.setOnItemSelectedListener {
-            when(it.itemId){
-                id.home -> {
-                    loadFragment(Home())
-                    true
-                }
-                id.gallery -> {
-                    loadFragment(Gallery())
-                    true
-                }
-                id.profile -> {
-                    loadFragment(Profile())
-                    true
-                }
-                id.event -> {
-                    loadFragment(Events())
-                    true
-                }
-                else->{
-                    loadFragment(Home())
-                    true
+        loadFragment(HomeFragment())
+        binding.bottomNavigation.setOnTabSelectListener(object : AnimatedBottomBar.OnTabSelectListener{
+            override fun onTabSelected(
+                lastIndex: Int,
+                lastTab: AnimatedBottomBar.Tab?,
+                newIndex: Int,
+                newTab: AnimatedBottomBar.Tab
+            ) {
+                when(newIndex){
+                    0-> loadFragment(HomeFragment())
+                    1-> loadFragment(CalendarFragment())
+                    2-> loadFragment(ProfileFragment(this@MainActivity))
                 }
             }
-        }
+
+        })
+
     }
-    private fun loadFragment(fragment: Fragment){
-        val fragmentTransaction = supportFragmentManager.beginTransaction()
-        fragmentTransaction.replace(id.fragmentContainer, fragment)
-        fragmentTransaction.addToBackStack(null)
-        fragmentTransaction.commit()
+
+
+
+    private fun loadNotification() {
+        val fragmentManager = supportFragmentManager.beginTransaction()
+        fragmentManager.replace(R.id.fragmentContainer, NotificationFragment())
+        fragmentManager.addToBackStack(null)
+        fragmentManager.commit()
+    }
+
+    private fun loadFragment(fragment: Fragment) {
+        val fragmentManager = supportFragmentManager.beginTransaction()
+        fragmentManager.replace(R.id.fragmentContainer, fragment)
+        fragmentManager.commit()
+    }
+
+    override fun onBackPressed() {
+        if (binding.bottomNavigation.selectedIndex != 0) {
+            loadFragment(HomeFragment())
+            binding.bottomNavigation.selectTabAt(0,true)
+        }
+        else {
+            super.onBackPressed()
+        }
     }
 }

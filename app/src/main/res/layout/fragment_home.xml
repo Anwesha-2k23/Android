@@ -1,21 +1,173 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/frameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragments.bottom_nav.Home">
+    tools:context=".home.HomeFragment">
 
-
-    <TextView
-        android:id="@+id/textView"
+    <HorizontalScrollView
+        android:id="@+id/animation_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Home Fragment"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:scaleType="centerInside"
+        app:layout_anchor="@+id/eventBottomSheet"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent" >
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <ScrollView
+            android:id="@+id/scrollView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <!--Add your background Map here-->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/map"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/background_image">
+
+                <!--Add Your venues here-->
+                <ImageView
+                    android:id="@+id/firstImage"
+                    android:layout_width="115dp"
+                    android:layout_height="155dp"
+                    android:layout_marginStart="640dp"
+                    android:layout_marginTop="240dp"
+                    android:src="@drawable/first_image"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/secondImage"
+                    android:layout_width="128dp"
+                    android:layout_height="175dp"
+                    android:layout_marginStart="44dp"
+                    android:layout_marginTop="528dp"
+                    android:src="@drawable/second_image"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/firstImage" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </ScrollView>
+
+    </HorizontalScrollView>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/nav_bar"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerInParent="true"
+            android:contentDescription="@string/todo"
+            android:src="@drawable/nav_bar" />
+
+    </androidx.appcompat.widget.Toolbar>
+
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/eventBottomSheet"
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:elevation="30dp"
+        android:background="@drawable/bottom_sheet_bg">
+
+        <View
+            android:id="@+id/view2"
+            android:layout_width="40dp"
+            android:layout_marginTop="10dp"
+            android:layout_height="4dp"
+            android:background="@drawable/edittext_rounded"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chipGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view2">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/dayOne"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Day 1" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/dayTwo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Day 2" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/dayThree"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Day 3" />
+
+        </com.google.android.material.chip.ChipGroup>
+
+        <TextView
+            android:id="@+id/eventText"
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:layout_marginHorizontal="15dp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="@string/events"
+            android:textColor="@color/black"
+            android:textSize="34sp"
+            android:visibility="visible"
+            android:layout_marginTop="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/chipGroup" />
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/eventsList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="120dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/eventText"
+            tools:listitem="@layout/event_design" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/navView"
+        android:layout_width="350dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:headerLayout="@layout/nav_header"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:menu="@menu/drawer_list" />
+</androidx.drawerlayout.widget.DrawerLayout>
