@@ -2,6 +2,7 @@ package com.college.anwesha2k23.home
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -133,6 +134,7 @@ class HomeFragment : Fragment()  {
         eventViewModel.getEventListObserver().observe(viewLifecycleOwner) {
             if (it != null) {
                 newEventList = it
+                Log.e("PRINT",it.toString())
                 adapter.setEvents(it)
                 adapter.notifyDataSetChanged()
                 adapter.setOnItemClickListener(object : EventAdapter.OnItemClickListener {

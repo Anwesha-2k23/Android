@@ -1,6 +1,7 @@
 package com.college.anwesha2k23.auth
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -63,12 +64,14 @@ class Signup : Fragment() {
                     }
 
                     else {
+
                         Snackbar.make(view, "Could not register!", Snackbar.LENGTH_LONG)
                             .setAnimationMode(BaseTransientBottomBar.ANIMATION_MODE_SLIDE).show()
                     }
                 }
                 catch(e: Exception) {
                     myDialog.showErrorAlertDialog("Oops! It seems like an error... ${e.message}")
+                    Log.e("ERROR",e.message.toString())
                 }
                 myDialog.dismissProgressDialog()
             }

@@ -44,14 +44,10 @@ class ProfileEventsAdapter(private val eventList: List<MyEventDetails>): Recycle
     }
 
     class MyViewHolder( binding: MyEventDesignBinding ):RecyclerView.ViewHolder(binding.root){
-
-
         val eventName: TextView = binding.eventName
         val eventStartTime: TextView = binding.eventStartTime
         val eventEndTime: TextView = binding.eventEndTime
         val eventVenue: TextView = binding.eventVenue
-
-
     }
 
 }

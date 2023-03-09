@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity() {
                 when(newIndex){
                     0-> loadFragment(HomeFragment())
                     1-> loadFragment(CalendarFragment())
-                    2-> loadFragment(ProfileFragment())
+                    2-> loadFragment(ProfileFragment(this@MainActivity))
                 }
             }
 
