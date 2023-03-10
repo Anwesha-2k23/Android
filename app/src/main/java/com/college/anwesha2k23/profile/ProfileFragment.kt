@@ -2,25 +2,19 @@ package com.college.anwesha2k23.profile
 
 import android.content.Context
 import android.os.Bundle
-import com.college.anwesha2k23.R
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.DecelerateInterpolator
 import android.view.animation.LinearInterpolator
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DefaultItemAnimator
-import androidx.recyclerview.widget.DiffUtil
 import com.college.anwesha2k23.databinding.FragmentProfileBinding
-import com.college.anwesha2k23.events.ProfileEventsAdapter
 import com.yuyakaido.android.cardstackview.*
-
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-
 
 
 class ProfileFragment(context : Context) : Fragment(),CardStackListener {
