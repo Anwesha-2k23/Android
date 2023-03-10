@@ -34,8 +34,8 @@ class splashActivity : AppCompatActivity() {
             if(sharedPref.getBoolean(getString(R.string.user_login_authentication), false)) {
                 moveToMainActivity()
             }else{
-//                moveToLoginActivity()
-                moveToMainActivity()
+                moveToLoginActivity()
+//                moveToMainActivity()
             }
         }, SPLASH_TIME_OUT)
     }
