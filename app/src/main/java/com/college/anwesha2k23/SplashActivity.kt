@@ -6,12 +6,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import com.college.anwesha2k23.auth.LoginActivity
 import com.college.anwesha2k23.databinding.ActivitySplashBinding
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 
-class splashActivity : AppCompatActivity() {
+class SplashActivity : AppCompatActivity() {
 
     private val SPLASH_TIME_OUT = 2000L
 
@@ -31,8 +30,8 @@ class splashActivity : AppCompatActivity() {
             if(sharedPref.getBoolean(getString(R.string.user_login_authentication), false)) {
                 moveToMainActivity()
             }else{
-//                moveToLoginActivity()
-                moveToMainActivity()
+                moveToLoginActivity()
+//                moveToMainActivity()
             }
         }, SPLASH_TIME_OUT)
     }
