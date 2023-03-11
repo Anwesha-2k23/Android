@@ -95,45 +95,51 @@ class SingleEventFragment : Fragment() {
 
             binding.prize.text = "Prizes worth ₹${event.prize}"
 
+            if(!event.is_active!!){
+                binding.registerBtn.visibility = View.GONE
+            }
+
             binding.registerBtn.setOnClickListener {
-                if(event.is_active!!){
+                if(event.is_active){
                     if(event.is_online!!){
                         val intent = Intent(Intent.ACTION_VIEW, Uri.parse(event.registration_link))
                         startActivity(intent)
                     }
                     else{
-                        Toast.makeText(context, "Event Registration will open soon", Toast.LENGTH_SHORT).show()
+                        // call solo or team api depending on event and then redirect to payu
+                        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(event.registration_link))
+
+                        val headers = Bundle()
+
+                        val sharedPref = requireActivity().getSharedPreferences("UserPreferences", Context.MODE_PRIVATE)
+
+                        var cookieString: String = ""
+
+                        for(cookie in sharedPref.getStringSet(getString(R.string.cookies), HashSet())!!) {
+                            cookieString += "$cookie; "
+
+                        }
+
+                        headers.putString("Set-Cookie", cookieString)
+
+                        intent.putExtra(Browser.EXTRA_HEADERS, headers)
+
+                        startActivity(intent)
+
+
                     }
-                }
-                else{
-                    // call solo or team api depending on event and then redirect to payu
-                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(event.registration_link))
-
-                    val headers = Bundle()
-
-                    val sharedPref = requireActivity().getSharedPreferences("UserPreferences", Context.MODE_PRIVATE)
-
-                    var cookieString: String = ""
-
-                    for(cookie in sharedPref.getStringSet(getString(R.string.cookies), HashSet())!!) {
-                        cookieString += "$cookie; "
-
-                    }
-
-                    headers.putString("Set-Cookie", cookieString)
-
-                    intent.putExtra(Browser.EXTRA_HEADERS, headers)
-
-                    startActivity(intent)
-
-
                 }
             }
 
+            if(event.video!!.isEmpty()){
+                binding.rulebookBtn.visibility = View.GONE
+            }
             binding.rulebookBtn.setOnClickListener {
                 val intent = Intent(Intent.ACTION_VIEW, Uri.parse(event.video))
                 startActivity(intent)
             }
+
+
         }
 
         return binding.root
