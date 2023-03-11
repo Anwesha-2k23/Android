@@ -9,6 +9,7 @@ import android.os.Looper
 import com.college.anwesha2k23.databinding.ActivitySplashBinding
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.crashlytics.FirebaseCrashlytics
+import com.google.firebase.messaging.FirebaseMessaging
 
 class SplashActivity : AppCompatActivity() {
 
@@ -20,6 +21,8 @@ class SplashActivity : AppCompatActivity() {
         binding = ActivitySplashBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+
+        FirebaseMessaging.getInstance().subscribeToTopic("notification")
 
         FirebaseAnalytics.getInstance(this);
         FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(true);
