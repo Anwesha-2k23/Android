@@ -84,8 +84,9 @@ class HomeFragment : Fragment() {
 
         val screenHeight = Resources.getSystem().displayMetrics.heightPixels
         val minScale = screenHeight.toFloat() / binding.map.height
-        binding.map.setMinimumScaleType(SubsamplingScaleImageView.SCALE_TYPE_CENTER_CROP)
-        binding.map.setMinScale(minScale)
+
+//        binding.map.setMinimumScaleType(SubsamplingScaleImageView.SCALE_TYPE_CENTER_CROP)
+//        binding.map.setMinScale(minScale)
 
         val markerImageView = binding.firstImage
         val layoutParams = FrameLayout.LayoutParams(
@@ -204,7 +205,8 @@ class HomeFragment : Fragment() {
 
     private fun loadSingleEventFragment(event: EventList) {
         val bundle = Bundle()
-        bundle.putString("eventID", event.id)
+//        bundle.putString("eventID", event.id)
+        bundle.putSerializable("event", event)
         val fragment = SingleEventFragment()
         fragment.arguments = bundle
         val fragmentTransaction = activity?.supportFragmentManager!!.beginTransaction()

@@ -22,7 +22,7 @@
                     android:layout_height="match_parent">
 
 
-            <!--Add your background Map here-->
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/map"
                 android:layout_width="match_parent"
@@ -37,10 +37,10 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
+            </androidx.constraintlayout.widget.ConstraintLayout>
                   </FrameLayout>
 
-                <!--Add Your venues here-->
-            </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     </HorizontalScrollView>
 
@@ -83,6 +83,7 @@
            tools:ignore="RtlHardcoded" />
 
     </androidx.appcompat.widget.Toolbar>
+
 
 
 
