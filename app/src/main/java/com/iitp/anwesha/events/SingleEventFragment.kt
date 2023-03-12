@@ -26,6 +26,7 @@ import java.util.*
 
 class SingleEventFragment : Fragment() {
     private lateinit var binding : FragmentSingleEventBinding
+    private lateinit var event: Event
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,6 +51,7 @@ class SingleEventFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentSingleEventBinding.inflate(inflater,container,false)
+
         val event = arguments?.getSerializable("event") as EventList
 
 
@@ -80,7 +82,10 @@ class SingleEventFragment : Fragment() {
                 binding.teamSize.text = "${event.min_team_size}-${event.max_team_size} Peoples"
             }
 
-            binding.registrationFee.text = "₹"+event.registration_fee
+
+
+                    binding.registrationFee.text = "₹"+event.registration_fee
+
 
             val endTime = event.registration_deadline
             val endDate = inputFormat.parse(endTime)
@@ -88,7 +93,8 @@ class SingleEventFragment : Fragment() {
             val endTimeSeparatedString= endTimeString.split(",").map{it.trim()}
             binding.registerDeadline.text = endTimeSeparatedString[0]
 
-            binding.eventLocation.text = event.venue
+
+                    binding.eventLocation.text = event.venue
 
 //            val organizerT = event.organizer.split(",")
 //            var organizer = ""
@@ -97,7 +103,9 @@ class SingleEventFragment : Fragment() {
 //            }
 //            binding.organizer.text = organizer
 
-            binding.prize.text = "Prizes worth ₹${event.prize}"
+
+                    binding.prize.text = "Prizes worth ₹${event.prize}"
+
 
             if(!event.is_active!!){
                 binding.registerBtn.visibility = View.GONE
@@ -186,6 +194,18 @@ class SingleEventFragment : Fragment() {
 
 
 
+
+
+
+                                startActivity(intent)
+
+
+
+
+        binding.backBtn.setOnClickListener {
+            requireActivity().supportFragmentManager.popBackStack(null, 0)
+
+        }
 
 
 
