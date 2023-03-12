@@ -2,7 +2,10 @@ package com.iitp.anwesha.events
 
 data class SoloRegistration(
     val message: String,
-    val payment_details: PaymentDetails
+    val payment_url: String
+)
+data class SoloPost(
+    val event_id: String
 )
 
 data class PaymentDetails(

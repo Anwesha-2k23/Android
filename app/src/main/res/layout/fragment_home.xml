@@ -21,11 +21,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
-                <com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView
-                    android:id="@+id/map"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:src="@drawable/map_real"/>
+
+            <!--Add your background Map here-->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/map"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
 
                 <ImageView
                     android:id="@+id/firstImage"
@@ -127,7 +129,6 @@
 
         <com.google.android.material.chip.ChipGroup
             android:id="@+id/chipGroup"
-            android:layout_marginTop="21dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
