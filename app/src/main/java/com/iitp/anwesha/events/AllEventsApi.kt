@@ -14,7 +14,7 @@ import retrofit2.http.POST
 interface AllEventsApi {
 
     @POST("event/registration/solo")
-    suspend fun soloEventRegistration(@Body event_id: String) : Response<SoloRegistration>
+    suspend fun soloEventRegistration(@Body soloRegistration: SoloRegistration) : Response<SoloRegistrationResponse>
 
     @POST("event/registration/team")
     suspend fun teamEventRegistration(@Body teamRegistration: TeamRegistration) : Response<TeamRegistrationResponse>

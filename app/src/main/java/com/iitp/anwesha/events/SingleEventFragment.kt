@@ -54,6 +54,10 @@ class SingleEventFragment : Fragment() {
 
         val event = arguments?.getSerializable("event") as EventList
 
+//        val event = arguments?.let {
+//            it.getString("eventID")
+//        }
+
 
         if(event!=null){
             Glide.with(requireContext())
@@ -120,7 +124,7 @@ class SingleEventFragment : Fragment() {
                         if(event.is_solo!!){
                             CoroutineScope(Dispatchers.IO).launch {
                                 try {
-                                    val response1 = EventsRegistrationApi(requireContext()).allEventsApi.soloEventRegistration(event.id!!)
+                                    val response1 = EventsRegistrationApi(requireContext()).allEventsApi.soloEventRegistration(SoloRegistration(event.id!!))
                                     Log.d("response", response1.body().toString())
                                     if(response1.isSuccessful){
                                         val soloRegistration = response1.body()
@@ -197,7 +201,7 @@ class SingleEventFragment : Fragment() {
 
 
 
-                                startActivity(intent)
+
 
 
 
