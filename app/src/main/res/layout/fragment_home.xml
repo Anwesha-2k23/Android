@@ -135,6 +135,25 @@
 
             <TextView
                 android:id="@+id/eventText"
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chipGroup"
+            android:layout_marginTop="21dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            app:layout_constraintStart_toStartOf="@id/view2"
+            app:layout_constraintTop_toBottomOf="@id/view2">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/dayOne"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Day 1"
+                android:textSize="12sp"
+                android:fontFamily="@font/poppins_medium"/>
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/dayTwo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="3dp"
