@@ -61,7 +61,6 @@ class HomeFragment : Fragment() {
         }
         val bottomSheet = binding.eventBottomSheet
         val behavior = BottomSheetBehavior.from(bottomSheet)
-        behavior.state = BottomSheetBehavior.STATE_COLLAPSED
         behavior.peekHeight = 1000
         binding.hintImg.visibility = View.GONE
         binding.hintTxt.visibility = View.GONE
