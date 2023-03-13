@@ -4,23 +4,20 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.iitp.anwesha.databinding.MyEventDesignBinding
-
+import com.iitp.anwesha.databinding.MyeventDesignBinding
 import java.text.SimpleDateFormat
 import java.util.*
 
 class ProfileEventsAdapter(private val eventList: List<MyEventDetails>): RecyclerView.Adapter<ProfileEventsAdapter.MyViewHolder>(){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        return MyViewHolder(MyEventDesignBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+        return MyViewHolder(MyeventDesignBinding.inflate(LayoutInflater.from(parent.context), parent, false))
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val currentItem = eventList[position]
-
         holder.eventName.text = currentItem.event_name
         holder.eventStartTime.text = getTimeFromDate(currentItem.event_start_time.toString())
-        holder.eventVenue.text = currentItem.event_venue
         holder.eventDate.text = getDayFromDate(currentItem.event_start_time.toString())
 
     }
@@ -29,11 +26,10 @@ class ProfileEventsAdapter(private val eventList: List<MyEventDetails>): Recycle
         return eventList.size
     }
 
-    class MyViewHolder( binding: MyEventDesignBinding ):RecyclerView.ViewHolder(binding.root){
+    class MyViewHolder( binding: MyeventDesignBinding ):RecyclerView.ViewHolder(binding.root){
 
         val eventName: TextView = binding.eventName
         val eventStartTime: TextView = binding.eventTime
-        val eventVenue: TextView = binding.eventLocation
         val eventDate: TextView = binding.eventDate
 
     }
