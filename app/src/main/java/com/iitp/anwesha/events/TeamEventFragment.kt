@@ -155,6 +155,11 @@ class TeamEventFragment : Fragment() {
                         }
                     }
                 }
+                else {
+                    requireActivity().runOnUiThread {
+                        Toast.makeText(context, "Invalid details ${response.code()}", Toast.LENGTH_SHORT).show()
+                    }
+                }
             }
 
 
