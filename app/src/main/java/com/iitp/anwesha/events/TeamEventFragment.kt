@@ -97,11 +97,19 @@ class TeamEventFragment : Fragment() {
         }
 
         binding.teamRegister.setOnClickListener {
+            val teamList = arrayListOf<String>()
+            var count = 0
+            for (child in binding.teamMembers.children) {
+                val memberName = child.findViewById<EditText>(R.id.team_member_id).text.toString()
+                if(memberName.isNotEmpty()) count++
+                teamList.add(memberName)
+            }
+            if(count < minTeamMembers!! || binding.teamName.text.toString().isEmpty()) {
+                Toast.makeText(context, "Please enter all the fields", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
             CoroutineScope(Dispatchers.IO).launch {
-                val teamList = arrayListOf<String>()
-                for (child in binding.teamMembers.children) {
-                    teamList.add(child.findViewById<EditText>(R.id.team_member_id).text.toString())
-                }
+
                 val teamRegistration =
                     TeamRegistration(eventID!!, binding.teamName.text.toString(), teamList)
                 val response =
