@@ -23,12 +23,19 @@ import com.yuyakaido.android.cardstackview.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 
 class ProfileFragment(context : Context) : Fragment(){
     private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding!!
     private var isEditProfile = false
+    private lateinit var fragmentContext: Context
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        fragmentContext = context
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,44 +65,42 @@ class ProfileFragment(context : Context) : Fragment(){
         }
 
         CoroutineScope(Dispatchers.IO).launch {
-
             val response = UserProfileApi(requireContext()).profileApi.getProfile()
             if (response.isSuccessful) {
                 val userInfo = response.body()!!
                 Log.d("userinfo: ", "${userInfo.anwesha_id}, ${userInfo.full_name}")
-                requireActivity().runOnUiThread(Runnable {
+                withContext(Dispatchers.Main) {
                     binding.profileName.setText(userInfo.full_name.toString())
-                    binding.anweshaId.setText(userInfo.anwesha_id)
+                    binding.anweshaId.setText(userInfo.anwesha_id.toString().toUpperCase())
                     binding.anweshaId2.setText(userInfo.anwesha_id)
                     binding.phoneNumber.setText(userInfo.phone_number)
                     binding.emailId.setText(userInfo.email_id)
                     binding.collegeName.setText(userInfo.college_name )
-                    binding.gender.setText(userInfo.gender ?: "LIQUID" )
+                    val gender = userInfo.gender ?: "Liquid"
+                    binding.gender.setText(gender.toString())
                     binding.visibleFrag.visibility = View.VISIBLE
                     binding.deliveryShimmer.visibility = View.GONE
-                })
+                }
             } else {
-                requireActivity().runOnUiThread(Runnable {
+                withContext(Dispatchers.Main) {
                     Toast.makeText(
                         context,
                         "error found: ${response.message()}",
                         Toast.LENGTH_SHORT
                     ).show()
-                })
+                }
             }
 
-            val response2 = UserProfileApi(requireContext()).profileApi.getMyEvents()
+            withContext(Dispatchers.Main) {
+            val response2 = UserProfileApi(fragmentContext).profileApi.getMyEvents()
             if (response2.isSuccessful) {
                 val eventsInfo = response2.body()!!
                 Log.e("PRINT", eventsInfo.toString())
-                requireActivity().runOnUiThread(Runnable {
-                    binding.rvRegistered.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-                     binding.rvRegistered.adapter = ProfileEventsAdapter(eventsInfo.solo)
-                })
+                    binding.rvRegistered.layoutManager = LinearLayoutManager(fragmentContext, LinearLayoutManager.HORIZONTAL, false)
+                    binding.rvRegistered.adapter = ProfileEventsAdapter(eventsInfo.solo)
+                }
             }
-
         }
-
 
         binding.editProfile.setOnClickListener {
             val animation =
@@ -104,8 +109,8 @@ class ProfileFragment(context : Context) : Fragment(){
             if(isEditProfile) {
                 setEditable(false, binding.profileName, InputType.TYPE_NULL)
                 setEditable(false, binding.phoneNumber, InputType.TYPE_NULL)
-                setEditable(false, binding.emailId, InputType.TYPE_NULL)
                 setEditable(false, binding.collegeName, InputType.TYPE_NULL)
+                setEditable(false, binding.gender, InputType.TYPE_NULL)
                 CoroutineScope(Dispatchers.IO).launch {
                     editProfile()
                     isEditProfile = !isEditProfile
@@ -130,8 +135,8 @@ class ProfileFragment(context : Context) : Fragment(){
                 )
                 setEditable(true, binding.profileName, InputType.TYPE_CLASS_TEXT)
                 setEditable(true, binding.phoneNumber, InputType.TYPE_CLASS_PHONE)
-                setEditable(true, binding.emailId, InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS)
                 setEditable(true, binding.collegeName, InputType.TYPE_CLASS_TEXT)
+                setEditable(true, binding.gender, InputType.TYPE_CLASS_TEXT)
                 isEditProfile = !isEditProfile
             }
         }
@@ -150,8 +155,9 @@ class ProfileFragment(context : Context) : Fragment(){
         val name = binding.profileName.text.toString()
         val phone = binding.phoneNumber.text.toString()
         val college = binding.collegeName.text.toString()
+        val gender = binding.gender.text.toString()
 
-        val updateProfile = UpdateProfile(phone, name, college)
+        val updateProfile = UpdateProfile(phone, name, college, gender)
 
         val response = UserProfileApi(requireContext()).profileApi.updateProfile(updateProfile)
 

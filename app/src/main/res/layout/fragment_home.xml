@@ -11,6 +11,7 @@
             android:id="@+id/animation_view"
             android:layout_width="wrap_content"
             android:layout_marginTop="60dp"
+            android:visibility="invisible"
             android:layout_height="wrap_content"
             android:scaleType="centerInside"
             app:layout_anchor="@+id/eventBottomSheet"
@@ -49,26 +50,83 @@
                             android:src="@drawable/nescafe"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
-
-                        <ImageView
-                            android:id="@+id/admin"
-                            android:layout_width="120dp"
-                            android:layout_height="120dp"
-                            android:src="@drawable/admin"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-                        <ImageView
+     <ImageView
                             android:id="@+id/sac"
                             android:layout_width="120dp"
                             android:layout_height="120dp"
                             android:src="@drawable/sac"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
+
                         <ImageView
                             android:id="@+id/gym"
                             android:layout_width="120dp"
                             android:layout_height="120dp"
                             android:src="@drawable/gym"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <ImageView
+                            android:id="@+id/basketball"
+                            android:layout_width="120dp"
+                            android:layout_height="120dp"
+                            android:src="@drawable/basketball"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <ImageView
+                            android:id="@+id/nsit"
+                            android:layout_width="120dp"
+                            android:layout_height="120dp"
+                            android:src="@drawable/nsit"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <ImageView
+                            android:id="@+id/food_court"
+                            android:layout_width="120dp"
+                            android:layout_height="120dp"
+                            android:src="@drawable/food_court"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <ImageView
+                            android:id="@+id/senate"
+                            android:layout_width="120dp"
+                            android:layout_height="120dp"
+                            android:src="@drawable/senate"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <ImageView
+                            android:id="@+id/helipad"
+                            android:layout_width="120dp"
+                            android:layout_height="120dp"
+                            android:src="@drawable/helipad"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <ImageView
+                            android:id="@+id/main_stage"
+                            android:layout_width="120dp"
+                            android:layout_height="120dp"
+                            android:src="@drawable/main_stage"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <ImageView
+                            android:id="@+id/lh1"
+                            android:layout_width="120dp"
+                            android:layout_height="120dp"
+                            android:src="@drawable/lh1"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <ImageView
+                            android:id="@+id/lh2"
+                            android:layout_width="120dp"
+                            android:layout_height="120dp"
+                            android:src="@drawable/lh2"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -177,7 +235,7 @@
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/day1"
                     android:layout_width="60dp"
-                    android:layout_height="25dp"
+                    android:layout_height="30dp"
                     android:textAllCaps="false"
                     android:background="@drawable/home_day_btn_bg"
                     android:fontFamily="@font/poppins_medium"
@@ -188,7 +246,7 @@
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/day2"
                     android:layout_width="60dp"
-                    android:layout_height="25dp"
+                    android:layout_height="30dp"
                     android:textAllCaps="false"
                     android:background="@drawable/home_day_btn_bg"
                     android:fontFamily="@font/poppins_medium"
@@ -200,7 +258,7 @@
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/day3"
                     android:layout_width="60dp"
-                    android:layout_height="25dp"
+                    android:layout_height="30dp"
                     android:textAllCaps="false"
                     android:background="@drawable/home_day_btn_bg"
                     android:fontFamily="@font/poppins_medium"
@@ -236,15 +294,49 @@
                 app:layout_constraintStart_toEndOf="@id/hintImg"
                 app:layout_constraintTop_toBottomOf="@id/dayGroup" />
 
+            <TextView
+                android:id="@+id/isEmpty"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:text="Oops! No Events found"
+                android:fontFamily="@font/poppins_regular"
+                android:textSize="20sp"
+                android:textColor="@color/black"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@id/hintTxt"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/eventsList"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
+                android:layout_marginTop="4dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/hintTxt"
                 tools:listitem="@layout/event_design" />
+
+            <com.facebook.shimmer.ShimmerFrameLayout
+                android:id="@+id/delivery_shimmer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="visible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/dayGroup">
+
+                <include
+                    android:id="@+id/include7"
+                    layout="@layout/home_events_shimmer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/dayGroup"/>
+
+            </com.facebook.shimmer.ShimmerFrameLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

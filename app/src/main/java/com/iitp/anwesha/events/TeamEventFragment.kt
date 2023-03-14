@@ -63,7 +63,9 @@ class TeamEventFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.teamEventName.text = eventName
 
-        for (i in 1..minTeamMembers!!) {
+
+        for (i in 1..minTeamMembers!!-1) {
+
             val teamMember = layoutInflater.inflate(R.layout.team_member_field, null)
 //            val teamMember = View.inflate(context, R.layout.team_member_field, binding.teamMembers)
             teamMember.findViewById<ImageView>(R.id.delete_team_member).visibility = View.INVISIBLE
@@ -126,16 +128,16 @@ class TeamEventFragment : Fragment() {
                                 Toast.LENGTH_SHORT
                             ).show()
 
-                            Log.d("log", "139")
-                            return@runOnUiThread
-                        } else if (teamReg.payment_url.isBlank()) {
 
-                            Log.d("log", "144")
+                            return@runOnUiThread
+                        } else if (teamReg.payment_url==null) {
+
+
                             Toast.makeText(requireContext(), teamReg.message, Toast.LENGTH_SHORT)
                                 .show()
                         } else {
 
-                            Log.d("log", "149")
+
                             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(teamReg.payment_url))
                             val headers = Bundle()
                             val sharedPref = requireActivity().getSharedPreferences(
@@ -157,7 +159,9 @@ class TeamEventFragment : Fragment() {
                 }
                 else {
                     requireActivity().runOnUiThread {
-                        Toast.makeText(context, "Invalid details ${response.code()}", Toast.LENGTH_SHORT).show()
+
+                        Toast.makeText(context, "Invalid details ${response.errorBody()}", Toast.LENGTH_SHORT).show()
+
                     }
                 }
             }
