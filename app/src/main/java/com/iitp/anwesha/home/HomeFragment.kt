@@ -94,25 +94,11 @@ class HomeFragment : Fragment() {
             binding.hintImg.visibility = View.VISIBLE
         }
 
-
-        val nescafe = binding.nes
-        val admin = binding.admin
-        val sac = binding.sac
-        val gym =binding.gym
-
-
         MapClickHandle(requireContext(), binding).mapClick()
 
 
         //Handle click when venues are clicked
         binding.nes.setOnClickListener {
-            val layoutParams = FrameLayout.LayoutParams(
-                400,
-                400
-            )
-            layoutParams.leftMargin =  1150
-            layoutParams.topMargin = 950
-            nescafe.layoutParams = layoutParams
             if(behavior.peekHeight!=1000){
                 slideUp.start()
             }
@@ -122,56 +108,75 @@ class HomeFragment : Fragment() {
         }
 
         binding.gym.setOnClickListener {
-            val layoutParams4= FrameLayout.LayoutParams(
-                400,
-                400
-            )
-            layoutParams4.leftMargin = 2740
-            layoutParams4.topMargin = 1060
-            gym.layoutParams = layoutParams4
+
             if(behavior.peekHeight!=1000){
                 slideUp.start()
             }
             binding.eventText.text ="Events at Gymkhana"
             venueClicked("Gymkhana, IIT PATNA")
         }
-        binding.admin.setOnClickListener {
-            val layoutParams2 = FrameLayout.LayoutParams(
-                400,
-                400
-            )
-            layoutParams2.leftMargin = 1340
-            layoutParams2.topMargin = 1220
-            admin.layoutParams = layoutParams2
-            if(behavior.peekHeight!=1000){
-                slideUp.start()
-            }
-            binding.eventText.text = "Events at Admin Block"
-        }
-        binding.admin.setOnClickListener {
-            val layoutParams2 = FrameLayout.LayoutParams(
-                400,
-                400
-            )
-            layoutParams2.leftMargin = 1340
-            layoutParams2.topMargin = 1220
-            admin.layoutParams = layoutParams2
-            slideUp.start()
-            venueClicked("First Image")
-        }
         binding.sac.setOnClickListener {
-            val layoutParams3 = FrameLayout.LayoutParams(
-                400,
-                400
-            )
-            layoutParams3.leftMargin = 1800
-            layoutParams3.topMargin = 980
-            sac.layoutParams = layoutParams3
             if(behavior.peekHeight!=1000){
                 slideUp.start()
             }
             binding.eventText.text = "Events at SAC"
             venueClicked("SAC Main Hall, IIT PATNA")
+        }
+        binding.mainStage.setOnClickListener {
+            if(behavior.peekHeight!=1000){
+                slideUp.start()
+            }
+            binding.eventText.text = "Events at MAIN STAGE"
+            venueClicked("Main Stage, IIT PATNA")
+        }
+        binding.basketball.setOnClickListener {
+            if(behavior.peekHeight!=1000){
+                slideUp.start()
+            }
+            binding.eventText.text = "Events at BASKETBALL COURT"
+            venueClicked("Basketball Court, IIT PATNA")
+        }
+        binding.nsit.setOnClickListener {
+            if(behavior.peekHeight!=1000){
+                slideUp.start()
+            }
+            binding.eventText.text = "Events at NSIT WALL"
+            venueClicked("NSIT Wall, IIT Patna")
+        }
+        binding.foodCourt.setOnClickListener {
+            if(behavior.peekHeight!=1000){
+                slideUp.start()
+            }
+            binding.eventText.text = "Events at FOOD COURT"
+            venueClicked("FOOD COURT, IIT PATNA")
+        }
+        binding.senate.setOnClickListener {
+            if(behavior.peekHeight!=1000){
+                slideUp.start()
+            }
+            binding.eventText.text = "Events at SENATE HALL"
+            venueClicked("Senate Hall, IIT PATNA")
+        }
+        binding.lh2.setOnClickListener {
+            if(behavior.peekHeight!=1000){
+                slideUp.start()
+            }
+            binding.eventText.text = "Events at LECTURE HALL 2"
+            venueClicked("Lecture Hall, IIT PATNA")
+        }
+        binding.lh1.setOnClickListener {
+            if(behavior.peekHeight!=1000){
+                slideUp.start()
+            }
+            binding.eventText.text = "Events at LECTURE HALL 1"
+            venueClicked("Lecture Hall, IIT PATNA")
+        }
+        binding.helipad.setOnClickListener {
+            if(behavior.peekHeight!=1000){
+                slideUp.start()
+            }
+            binding.eventText.text = "Events at HELIPAD"
+            venueClicked("Helipad Stage, IIT PATNA")
         }
 
         binding.festPasses.setOnClickListener {
