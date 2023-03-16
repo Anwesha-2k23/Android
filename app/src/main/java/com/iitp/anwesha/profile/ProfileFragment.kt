@@ -3,6 +3,7 @@ package com.iitp.anwesha.profile
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
+import android.graphics.Bitmap
 import android.os.Bundle
 import android.text.InputType
 import android.util.Log
@@ -17,7 +18,11 @@ import android.widget.Toast
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.zxing.BarcodeFormat
+import com.google.zxing.qrcode.QRCodeWriter
+import com.google.zxing.qrcode.encoder.QRCode
 import com.iitp.anwesha.databinding.FragmentProfileBinding
+import com.journeyapps.barcodescanner.BarcodeEncoder
 
 import com.yuyakaido.android.cardstackview.*
 
@@ -76,7 +81,7 @@ class ProfileFragment(context : Context) : Fragment(){
                     binding.anweshaId2.setText(userInfo.anwesha_id)
                     binding.phoneNumber.setText(userInfo.phone_number)
                     binding.emailId.setText(userInfo.email_id)
-                    binding.collegeName.setText(userInfo.college_name )
+                    binding.collegeName.setText(userInfo.college_name)
                     val gender = userInfo.gender ?: "Liquid"
                     binding.gender.setText(gender.toString())
                     binding.visibleFrag.visibility = View.VISIBLE

@@ -15,7 +15,7 @@ interface SponsorApi {
     suspend fun getSponsor() : Response<List<SponsorResponse>>
 }
 
-class sponsorapi(val context: Context) {
+class MySponsorApi(val context: Context) {
     val sponsorApi: SponsorApi
     init {
         val client = OkHttpClient.Builder().addInterceptor(AddCookiesInterceptor(context)).build()

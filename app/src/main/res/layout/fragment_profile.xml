@@ -14,7 +14,7 @@
         android:orientation="vertical"
         android:visibility="invisible">
 
-        <!--        Top-->
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/linearLayout2"
             android:layout_width="match_parent"
@@ -315,7 +315,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/view14">
 
                     <ImageView
-                        android:id="@+id/imageView"
+                        android:id="@+id/profile_qr_code"
                         android:layout_width="207dp"
                         android:layout_height="207dp"
                         android:layout_gravity="center"

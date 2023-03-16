@@ -67,7 +67,7 @@ class sponsorsFragment : Fragment() {
 
         CoroutineScope(Dispatchers.IO).launch {
             withContext(Dispatchers.Main) {
-                val response2 = sponsorapi(requireContext()).sponsorApi.getSponsor()
+                val response2 = MySponsorApi(requireContext()).sponsorApi.getSponsor()
                 if (response2.isSuccessful) {
                     val sponsorInfo = response2.body()!!
                     Log.e("PRINT", sponsorInfo.toString())

@@ -60,6 +60,9 @@ class HomeFragment : Fragment() {
             requireActivity().findViewById<TextView>(R.id.nameText2).text =
                 sharedPref.getString(getString(R.string.user_name), "User")
 
+            requireActivity().findViewById<TextView>(R.id.anwesha_id_navbar).text =
+                sharedPref.getString(getString(R.string.anwesha_id), "ANW00000")
+
             drawerLayout.openDrawer(GravityCompat.START)
         }
 

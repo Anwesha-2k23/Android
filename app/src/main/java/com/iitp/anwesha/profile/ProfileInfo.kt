@@ -10,6 +10,10 @@ data class ProfileResponse(
     val is_email_verified: Boolean,
     val gender: String?,
     val is_profile_completed: Boolean,
+    val profilePicture: String?,
+    val user_type: String,
+    val qr_code: String
+
 )
 
 data class MyEventDetails(
