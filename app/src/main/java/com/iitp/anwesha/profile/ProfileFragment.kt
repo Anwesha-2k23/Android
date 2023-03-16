@@ -176,6 +176,7 @@ class ProfileFragment(context: Context) : Fragment() {
                         else{
                             soloEvents.add(i)
 
+
                         }
 
                     }
