@@ -59,11 +59,12 @@ class HomeFragment : Fragment() {
         binding.navBar.setOnClickListener {
             requireActivity().findViewById<TextView>(R.id.nameText2).text =
                 sharedPref.getString(getString(R.string.user_name), "User")
-
-            requireActivity().findViewById<TextView>(R.id.anwesha_id_navbar).text =
-                sharedPref.getString(getString(R.string.anwesha_id), "ANW00000")
-
+            requireActivity().findViewById<TextView>(R.id.textView).text =
+                sharedPref.getString("anwesha_id", "id")
             drawerLayout.openDrawer(GravityCompat.START)
+        }
+        if (sharedPref.getString("user_type", "user_type")=="iitp_student"){
+            binding.festPasses.visibility = View.GONE
         }
 
         val bottomSheet = binding.eventBottomSheet
@@ -77,7 +78,6 @@ class HomeFragment : Fragment() {
             binding.hintTxt.visibility = View.VISIBLE
             binding.hintImg.visibility = View.VISIBLE
         }
-
 
         MapClickHandle(requireContext(), binding).mapClick()
 
@@ -328,12 +328,6 @@ class HomeFragment : Fragment() {
         eventViewModel.makeApiCall(requireContext())
     }
 
-    fun loadFragment(fragment: Fragment) {
-        val fragmentManager = activity?.supportFragmentManager!!.beginTransaction()
-        fragmentManager.replace(R.id.fragmentContainer, fragment)
-        fragmentManager.commit()
-    }
-
     private fun loadPassesFragment(fragment: Fragment) {
         val fragmentManager = requireActivity().supportFragmentManager.beginTransaction()
         fragmentManager.replace(R.id.fragmentContainer, fragment)
@@ -351,7 +345,6 @@ class HomeFragment : Fragment() {
         fragmentTransaction.replace(R.id.fragmentContainer, fragment)
         fragmentTransaction.addToBackStack(null)
         fragmentTransaction.commit()
-
     }
 
 

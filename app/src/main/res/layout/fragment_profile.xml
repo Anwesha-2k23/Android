@@ -7,14 +7,26 @@
     android:clipChildren="false"
     android:clipToPadding="false">
 
+    <ProgressBar
+        android:id="@+id/progressBar2"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:visibility="gone"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
     <LinearLayout
         android:id="@+id/visible_frag"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:visibility="invisible">
+        android:visibility="visible">
 
-
+        <!--        Top-->
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/linearLayout2"
             android:layout_width="match_parent"
@@ -122,7 +134,6 @@
                 app:layout_constraintStart_toEndOf="@+id/linearLayout3"
                 app:layout_constraintTop_toTopOf="@+id/linearLayout3"
                 app:srcCompat="@drawable/edit_profile_icon" />
-
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <ScrollView
@@ -198,6 +209,7 @@
                                     android:layout_height="wrap_content"
                                     android:fontFamily="@font/poppins_medium"
                                     android:text="Gender"
+                                    android:minWidth="100dp"
                                     android:textColor="@color/black"
                                     android:textSize="16sp" />
 
@@ -207,6 +219,7 @@
                                     android:background="@android:color/transparent"
                                     android:layout_width="wrap_content"
                                     android:clickable="false"
+                                    android:minWidth="100dp"
                                     android:cursorVisible="false"
                                     android:focusable="false"
                                     android:focusableInTouchMode="false"
@@ -248,6 +261,7 @@
                                     android:fontFamily="@font/poppins_regular"
                                     android:textColor="#414141"
                                     android:textSize="14sp"
+                                    android:minWidth="100dp"
                                     android:background="@android:color/transparent"
                                     android:inputType="none"
                                     android:clickable="false"
@@ -286,6 +300,7 @@
                                     android:background="@android:color/transparent"
                                     android:inputType="none"
                                     android:clickable="false"
+                                    android:minWidth="100dp"
                                     android:cursorVisible="false"
                                     android:focusable="false"
                                     android:focusableInTouchMode="false"
@@ -315,11 +330,11 @@
                     app:layout_constraintTop_toBottomOf="@+id/view14">
 
                     <ImageView
-                        android:id="@+id/profile_qr_code"
-                        android:layout_width="207dp"
-                        android:layout_height="207dp"
+                        android:id="@+id/imageView"
+                        android:layout_width="250dp"
+                        android:src="@drawable/qr_mock_bg"
+                        android:layout_height="250dp"
                         android:layout_gravity="center"
-                        app:srcCompat="@drawable/test_qr"
                         tools:layout_editor_absoluteX="95dp"
                         tools:layout_editor_absoluteY="289dp" />
 
@@ -327,7 +342,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="36dp"
                         android:layout_gravity="center"
-                        android:layout_marginTop="10dp"
+                        android:layout_marginTop="5dp"
                         android:orientation="horizontal">
 
                         <TextView
@@ -353,6 +368,17 @@
 
                     </LinearLayout>
 
+                    <TextView
+                        android:id="@+id/bt_regenerate"
+                        android:layout_width="wrap_content"
+                        android:text="Regenerate QR"
+                        android:layout_gravity="center"
+                        android:paddingHorizontal="10dp"
+                        android:paddingVertical="5dp"
+                        android:layout_marginTop="10dp"
+                        android:textSize="18sp"
+                        android:background="@drawable/button_bg_grey"
+                        android:layout_height="match_parent"/>
 
                 </LinearLayout>
 
@@ -403,6 +429,17 @@
                     tools:layout_editor_absoluteX="1dp"
                     tools:listitem="@layout/myevent_design" />
 
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_team_adapter"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintTop_toBottomOf="parent"
+                    tools:listitem="@layout/myevent_design" />
+
+                
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 
@@ -415,7 +452,7 @@
         android:id="@+id/delivery_shimmer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="visible"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

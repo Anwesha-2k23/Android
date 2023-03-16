@@ -85,7 +85,6 @@
 
     <string-array name="user_types">
         <item>Student</item>
-        <item>IITP Student</item>
         <item>Not a Student</item>
         <item>Alumni</item>
         <item>Faculty</item>

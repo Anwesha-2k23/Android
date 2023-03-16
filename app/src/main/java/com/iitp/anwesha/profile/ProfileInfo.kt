@@ -10,11 +10,10 @@ data class ProfileResponse(
     val is_email_verified: Boolean,
     val gender: String?,
     val is_profile_completed: Boolean,
-    val profilePicture: String?,
-    val user_type: String,
     val qr_code: String
-
 )
+
+data class QrResponse(val qr_code: String)
 
 data class MyEventDetails(
     val event_id: String,
@@ -26,7 +25,6 @@ data class MyEventDetails(
     val event_is_active: Boolean,
     val order_id: String,
     val payment_done: Boolean,
-
 )
 
 data class MyEvents(
@@ -35,12 +33,12 @@ data class MyEvents(
 )
 
 data class UpdateProfile(
-    val phone_number : String,
-    val full_name : String,
-    val college_name : String? = "",
+    val phone_number: String,
+    val full_name: String,
+    val college_name: String? = "",
     val gender: String? = "",
-    val age : Int? = 0,
-    val user_type : String? = "new_user_type",
-    val instagram_id : String? = "new instagram_id",
-    val facebook_id : String? = "New_facebook_id"
+    val age: Int? = 0,
+    val user_type: String? = "new_user_type",
+    val instagram_id: String? = "new instagram_id",
+    val facebook_id: String? = "New_facebook_id"
 )

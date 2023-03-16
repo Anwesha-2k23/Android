@@ -22,8 +22,7 @@ data class LoginResponse(
     val success: Boolean,
     val name: String,
     val anwesha_id: String,
-    val user_type: String,
-    val qr_code: String
+    val user_type: String
 )
 
 data class LogoutResponse(

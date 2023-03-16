@@ -1,4 +1,4 @@
-package com.iitp.anwesha.sponsors
+package com.iitp.anwesha.profile
 
 import android.content.Context
 import com.iitp.anwesha.AddCookiesInterceptor
@@ -9,13 +9,13 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
 
-interface SponsorApi {
-    @GET("sponsors/allsponsors")
-    suspend fun getSponsor() : Response<List<SponsorResponse>>
+interface QrApi {
+    @GET("user/regenerateqr/")
+    suspend fun getQr() : Response<QrResponse>
 }
 
-class SponsorCall(val context: Context) {
-    val sponsorApi: SponsorApi
+class QrGetApi(val context: Context) {
+    val qrApi: QrApi
     init {
         val client = OkHttpClient.Builder().addInterceptor(AddCookiesInterceptor(context)).build()
 
@@ -24,6 +24,6 @@ class SponsorCall(val context: Context) {
             .client(client)
             .addConverterFactory(MoshiConverterFactory.create())
             .build()
-        sponsorApi = retrofit.create(SponsorApi::class.java)
+        qrApi = retrofit.create(QrApi::class.java)
     }
 }

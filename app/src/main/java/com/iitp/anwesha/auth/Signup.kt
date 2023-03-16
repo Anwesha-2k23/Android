@@ -28,6 +28,13 @@ import kotlinx.coroutines.launch
 
 class Signup : Fragment() {
     private lateinit var binding: FragmentSignupBinding
+    private lateinit var email: String
+    private lateinit var phone: String
+    private lateinit var password: String
+    private lateinit var cPassword: String
+    private lateinit var name: String
+    private lateinit var college: String
+    private lateinit var userType: String
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -41,19 +48,60 @@ class Signup : Fragment() {
 
         val myDialog = MyDialog(requireContext())
 
+        college = "IIT Patna"
+        userType = "iitp_student"
+        binding.iitStudentBtn.setOnClickListener {
+            if (binding.iitStudentBtn.isChecked){
+                binding.collegeName.visibility = View.GONE
+                binding.anweshaCollegeName.visibility = View.GONE
+                binding.anweshaUserType.visibility = View.GONE
+                binding.userType.visibility = View.GONE
+
+            }
+            else{
+                binding.collegeName.visibility = View.VISIBLE
+                binding.anweshaCollegeName.visibility = View.VISIBLE
+                binding.anweshaUserType.visibility = View.VISIBLE
+                binding.userType.visibility = View.VISIBLE
+            }
+        }
+
+
+
             binding.SignupButton.setOnClickListener {
                 if(binding.acceptTermButton.isChecked) {
-                    val email = checkValue(binding.EmailId)!!.trimEnd()
-                    val phone = checkValue(binding.Contactnumber) ?: return@setOnClickListener
-                    val password = checkValue(binding.AnweshaPassword) ?: return@setOnClickListener
-                    val confirmPassword =
-                    checkValue(binding.ConfirmPassword) ?: return@setOnClickListener
-                    val name = checkValue(binding.anweshaFullName)!!.trimEnd()
-                    val college = checkValue(binding.anweshaCollegeName)!!.trimEnd()
-                    val userType =
-                    checkSpinnerValue(binding.anweshaUserType) ?: return@setOnClickListener
-                    if (password != confirmPassword) {
-                        binding.ConfirmPassword.error = "Password does not match!"
+                    name = checkValue(binding.anweshaFullName)?.trimEnd() ?: return@setOnClickListener
+                    email = checkValue(binding.emailId)?.trimEnd() ?: return@setOnClickListener
+                    if(binding.iitStudentBtn.isChecked){
+                        if (!isValidIITPEmail(email)){
+                            Snackbar.make(view, "Please enter institute email address", Snackbar.LENGTH_LONG)
+                                .setAnimationMode(BaseTransientBottomBar.ANIMATION_MODE_SLIDE)
+                                .show()
+                            return@setOnClickListener
+                        }
+                    }
+                    else{
+                        if(!isValidEmail(email)){
+                            Snackbar.make(view, "Please enter valid email address", Snackbar.LENGTH_LONG)
+                                .setAnimationMode(BaseTransientBottomBar.ANIMATION_MODE_SLIDE)
+                                .show()
+                        }
+                    }
+
+                    phone = checkValue(binding.contactNumber) ?: return@setOnClickListener
+                    password = checkValue(binding.AnweshaPassword) ?: return@setOnClickListener
+                    cPassword = checkValue(binding.ConfirmPassword) ?: return@setOnClickListener
+
+
+                    if (!binding.iitStudentBtn.isChecked){
+                        college = checkValue(binding.anweshaCollegeName)?.trimEnd() ?: return@setOnClickListener
+                        userType = checkSpinnerValue(binding.anweshaUserType) ?: return@setOnClickListener
+                    }
+
+                    if (password != cPassword) {
+                        Snackbar.make(view, "Password doesn't match", Snackbar.LENGTH_LONG)
+                            .setAnimationMode(BaseTransientBottomBar.ANIMATION_MODE_SLIDE)
+                            .show()
                         return@setOnClickListener
                     }
                     binding.ConfirmPassword.error = null
@@ -123,6 +171,18 @@ class Signup : Fragment() {
         fragmentTransaction.commit()
     }
 
+    fun isValidEmail(email: String): Boolean {
+        val emailRegex = Regex("[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}")
+        return emailRegex.matches(email)
+    }
+
+    fun isValidIITPEmail(email: String): Boolean {
+        val emailRegex = Regex("^\\w+@iitp\\.ac\\.in\$")
+        return emailRegex.matches(email)
+    }
+
+
+
     private fun checkSpinnerValue(spinner: Spinner) : String? {
         var value = spinner.selectedItem.toString()
         if(value.isBlank()) {
@@ -131,7 +191,6 @@ class Signup : Fragment() {
         }
         value = when(value) {
             "Student" -> "student"
-            "IITP Student" -> "iitp_student"
             "Not a Student" -> "non-student"
             "Alumni" -> "alumni"
             "Faculty" -> "faculty"
